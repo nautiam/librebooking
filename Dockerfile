@@ -28,6 +28,10 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli
 
 WORKDIR /var/www/librebooking
+RUN apt-get update && apt-get install -y curl git
+RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN composer require smarty/smarty
 RUN mkdir -p tpl_c tpl uploads
 RUN chown -R www-data:www-data tpl_c tpl uploads
 
